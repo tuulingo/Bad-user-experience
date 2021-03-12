@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not a great way to enter your mobile number</title>
+</head>
+
+<body>
+    <div style="display:inline-block">
+        <p style="margin: auto;">Enter your phone number</p>
+        <input style="margin-top: 10px;" type="text" id="phone" disabled="disabled">
+        <div>
+            <button style="margin-top: 10px;" onclick="LesserThan()">
+                Less
+            </button>
+            <button id="reset" onclick="reset()">Reset</button>
+            <button id="lessBtn" style="margin-top: 10px;" id="lesserId" onclick="GreaterThan()">
+                Greater
+            </button>
+        </div>
+    </div>
+    <div style="display:inline-block">
+        <p>How many characters are in your number</p>
+        <select data-attr="dropdown" id="dropdown">
+            <option value="7" id="7numbers">7</option>
+            <option value="8" id="8numbers">8</option>
+        </select>
+    </div>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    var btnClicks = 0;
+    var dropdown = document.getElementById("dropdown");
+    var number = document.getElementById("phone")
+    function GreaterThan() {
+        if (dropdown.value == 7) {
+            var rnd = getRandomArbitrary(5000000, 5999999).toString();
+            while (rnd < number.value) {
+                rnd = getRandomArbitrary(5000000, 5999999).toString();
+            };
+            number.value = rnd.substring(0, 7);
+            btnClicks++;
+        }
+        else if (dropdown.value == 8) {
+
+            var rnd = getRandomArbitrary(50000000, 59999999).toString();
+            while (rnd < number.value) {
+                rnd = getRandomArbitrary(50000000, 59999999).toString();
+            };
+            number.value = rnd.substring(0, 8);
+            btnClicks++;
+        }
+    }
+    function LesserThan() {
+        if (btnClicks == 0) {
+            GreaterThan();
+        }
+        if (dropdown.value == 7) {
+
+            var rnd = getRandomArbitrary(5000000, 5999999).toString();
+            while (rnd > number.value) {
+                rnd = getRandomArbitrary(5000000, 5999999).toString();
+            };
+            number.value = rnd.substring(0, 7);
+        }
+        else if (dropdown.value == 8) {
+            if (btnClicks == 0) {
+                GreaterThan();
+            }
+            var rnd = getRandomArbitrary(50000000, 59999999).toString();
+            while (rnd > number.value) {
+                rnd = getRandomArbitrary(50000000, 59999999).toString();
+            };
+            number.value = rnd.substring(0, 8);
+        }
+    }
+
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function reset() {
+        number.value = null;
+    }
+</script>
